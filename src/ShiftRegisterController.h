@@ -26,9 +26,9 @@ public:
     //通常のインターフェース Normal Interface
     //  標準のI/Oを拡張する Extend Standard I/O
     //      拡張digitalWrite() Extend digitalWrite()
-    void digitalWriteExt(uint8_t pin, bool mode);
+    void digitalWrite(uint8_t pin, bool mode);
     //      拡張digitalRead() Extend digitalRead()
-    bool digitalReadExt(uint8_t pin);
+    bool digitalRead(uint8_t pin);
 
     //  シフトレジスタのピンを直接操作する Directly Manipulate Shift Register Pins
     //      ビットデータを書き込む Write Bit Data

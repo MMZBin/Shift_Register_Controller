@@ -31,10 +31,10 @@ void ShiftRegisterController::init() {
 //通常のインターフェース Normal Interface
 //  標準のI/Oを拡張する Extend Standard I/O
 //      拡張digitalWrite() Extend digitalWrite()
-void ShiftRegisterController::digitalWriteExt(uint8_t pin, bool mode) {
+void ShiftRegisterController::digitalWrite(uint8_t pin, bool mode) {
     //通常のピンの範囲であれば標準のdigitalWrite()を呼ぶ Call the standard digitalWrite() within the range of normal pins.
     if (pin < NUM_PINS) {
-        digitalWrite(pin, mode);
+        ::digitalWrite(pin, mode);
         return;
     }
 
@@ -43,9 +43,9 @@ void ShiftRegisterController::digitalWriteExt(uint8_t pin, bool mode) {
 }
 
 //      拡張digitalRead() Extend digitalRead()
-bool ShiftRegisterController::digitalReadExt(uint8_t pin) {
+bool ShiftRegisterController::digitalRead(uint8_t pin) {
     //通常のピンの範囲であれば標準のdigitalRead()を呼ぶ Call the standard digitalRead() within the range of normal pins.
-    if (pin < NUM_PINS) { return digitalRead(pin); }
+    if (pin < NUM_PINS) { return ::digitalRead(pin); }
     return getBit(pin - NUM_PINS); //指定したピンからデジタルIOピンを引いた数(シフトレジスタのピン)の状態を返す Return the state of the specified number of digital I/O pins (shift register pins) pulled from the specified pin.
 }
 
@@ -105,11 +105,11 @@ void ShiftRegisterController::sendData() {
 
 //シフトレジスタの制御ピンを管理する Manage Control Pins of the Shift Register
 //クロックを制御する Control the Clock
-void ShiftRegisterController::setClock(bool mode) { digitalWrite(clockPin_, mode); }
+void ShiftRegisterController::setClock(bool mode) { ::digitalWrite(clockPin_, mode); }
 //ラッチを制御する Control the Latch
-void ShiftRegisterController::setLatch(bool mode) { digitalWrite(latchPin_, mode); }
+void ShiftRegisterController::setLatch(bool mode) { ::digitalWrite(latchPin_, mode); }
 //データを制御する Control the Data
-void ShiftRegisterController::setData(bool mode) { digitalWrite(dataPin_, mode); }
+void ShiftRegisterController::setData(bool mode) { ::digitalWrite(dataPin_, mode); }
 
 //ビット制御系 Bit Control System
 //  指定したビットの状態を取得する Get State of Specified Bit
